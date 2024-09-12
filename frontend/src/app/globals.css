@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 137.5 100% 2.71%;
+    --foreground: 123.64 89.19% 92.75%;
+
+    --primary: 125.07 91.09% 51.57%;
+    --primary-foreground: 125.45 84.62% 5.1%;
+
+    --card: 126.67 31.03% 5.69%;
+    --card-foreground: 123.64 89.19% 92.75%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 123.64 89.19% 92.75%;
+
+    --secondary: 124.62 84.78% 18.04%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 9.8%;
+    --muted-foreground: 0 0% 50.2%;
+
+    --accent: 124.62 84.78% 18.04%;
+    --accent-foreground: 123.64 89.19% 92.75%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 125.33 84.91% 10.39%;
+    --input: 125.22 22.33% 20.2%;
+    --ring: 125.07 91.09% 51.57%;
+
+    --chart-1: 125.07 91.09% 51.57%;
+    --chart-2: 125.03 85.65% 43.73%;
+    --chart-3: 125.31 85.96% 33.53%;
+    --chart-4: 125.32 86.11% 28.24%;
+    --chart-5: 124.75 84.87% 23.33%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+input[type="file"]::file-selector-button {
+  @apply text-foreground;
+}
