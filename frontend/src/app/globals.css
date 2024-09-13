@@ -47,10 +47,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground bg-background;
   }
 }
 
 input[type="file"]::file-selector-button {
   @apply text-foreground;
+}
+
+.rcp-body {
+  @apply bg-background;
 }

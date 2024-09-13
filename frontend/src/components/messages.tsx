@@ -131,27 +131,27 @@ export default function Messages({ messages, privateKey, ownerId }: Props) {
                     ]
                   </span>
 
-                  {ownerId === message.sender.id ? (
-                    <>
-                      <span
-                        style={{
-                          textShadow: `0px 0px 10px hsl(var(--primary))`,
-                        }}
-                        className="text-primary"
-                      >
-                        {"["}ADMIN{"]"}
-                      </span>
-                      {"<"}
-                      {message.sender.username}
-                      {">"}
-                    </>
-                  ) : (
-                    <>
-                      {"<"}
-                      {message.sender.username}
-                      {">"}
-                    </>
+                  {ownerId === message.sender.id && (
+                    <span
+                      style={{
+                        textShadow: `0px 0px 10px hsl(var(--primary))`,
+                      }}
+                      className="text-primary"
+                    >
+                      {"["}ADMIN{"]"}
+                    </span>
                   )}
+                  <span
+                    style={{
+                      color:
+                        message.sender.colorNickname ||
+                        "hsl(var(--foreground))",
+                    }}
+                  >
+                    {"<"}
+                    {message.sender.username}
+                    {">"}
+                  </span>
                   {": "}
                 </div>
                 <p className="break-words ml-1">{message.text}</p>

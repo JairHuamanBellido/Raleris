@@ -65,7 +65,7 @@ export default function SubmitKeysDialog({ chat }: Props) {
                 name: chat.name,
                 ownerId: chat.ownerId,
                 password: password,
-                publickey: publicPem!,
+                publicKey: publicPem!,
                 privateKey: privatePem!,
               });
 

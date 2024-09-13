@@ -4,7 +4,7 @@ export interface ICreateChatGroup {
   readonly id?: string;
   readonly name: string;
   readonly privateKey: CryptoKey;
-  readonly publickey: CryptoKey;
+  readonly publicKey: CryptoKey;
   readonly ownerId: string;
   readonly password: string;
 }

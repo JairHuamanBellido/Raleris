@@ -9,7 +9,7 @@ import { useUserStore } from "@/store/user.store";
 export default function SubmitMessage() {
   const params = useParams();
   const chatId = params.id as string;
-  const { id, username } = useUserStore();
+  const { id, username, usernameColor } = useUserStore();
 
   const [message, setMessage] = useState<string>("");
 
@@ -17,6 +17,7 @@ export default function SubmitMessage() {
     const newMessage = await ChatGroupService.sendMessage(message, chatId, {
       id,
       username,
+      colorNickname: usernameColor,
     });
 
     socket.emit("send-message", {

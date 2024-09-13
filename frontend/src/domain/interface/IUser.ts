@@ -3,3 +3,5 @@ export interface IUser {
     username:string;
     colorNickname?:string;
 }
+
+export interface IUpdateUser extends IUser {}

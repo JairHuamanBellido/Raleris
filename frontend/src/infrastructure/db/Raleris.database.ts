@@ -22,7 +22,7 @@ class RalerisDatabase extends Dexie {
       messages: [],
       name: payload.name,
       privateKey: payload.privateKey,
-      publicKey: payload.publickey,
+      publicKey: payload.publicKey,
       ownerId: payload.ownerId,
       password: payload.password,
     });

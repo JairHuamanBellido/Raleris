@@ -43,7 +43,7 @@ export default function CreateGroupChatDialog() {
             const roomId = await ChatGroupService.create({
               name,
               privateKey: privatePem!,
-              publickey: publicPem!,
+              publicKey: publicPem!,
               ownerId: userId,
               password,
             });
