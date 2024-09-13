@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "react-color-palette/css";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = IBM_Plex_Mono({ weight: ["400"], subsets: ["latin"] });
 
@@ -17,8 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.className} h-screen w-screen  text-foreground bg-background`}>
+        className={`${font.className} h-screen w-screen`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

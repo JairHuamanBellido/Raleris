@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 type State = {
   username: string;
   id: string;
+  usernameColor?: string;
 };
 
 type Action = {
@@ -16,7 +17,11 @@ export const useUserStore = create<State & Action, any>(
       id: "",
       username: "",
       updateUser: (payload) =>
-        set({ id: payload.id, username: payload.username }),
+        set({
+          id: payload.id,
+          username: payload.username,
+          usernameColor: payload.usernameColor,
+        }),
     }),
     {
       name: "raleris-user-storage",

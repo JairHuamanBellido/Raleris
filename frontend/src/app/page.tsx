@@ -80,6 +80,7 @@ export default function Home() {
                   updateUser({
                     id: user.id ?? "",
                     username: user.username,
+                    usernameColor: user.colorUsername
                   });
 
                   push("/rooms");

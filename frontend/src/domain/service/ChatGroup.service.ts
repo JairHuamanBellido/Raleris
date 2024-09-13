@@ -13,7 +13,7 @@ export class ChatGroupService {
   static async create(payload: ICreateChatGroup) {
     const encryptedPassword = await EncryptionService.encryptText(
       payload.password,
-      payload.publickey
+      payload.publicKey
     );
 
     const newChatGroup: IChatGroup = {
@@ -21,7 +21,7 @@ export class ChatGroupService {
       messages: [],
       name: payload.name,
       privateKey: payload.privateKey,
-      publicKey: payload.publickey,
+      publicKey: payload.publicKey,
       ownerId: payload.ownerId,
       password: encryptedPassword,
     };

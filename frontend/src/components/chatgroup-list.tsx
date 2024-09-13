@@ -10,7 +10,7 @@ export default function ChatGroupList() {
     <>
       {!!chatGroup &&
         chatGroup.map((chat) => (
-          <div className="border w-[400px] p-4 space-y-4">
+          <div key={chat.id} className="border w-[400px] p-4 space-y-4">
             <p className="text-xl">{chat.name}</p>
             <Button variant={"ghost"} asChild>
               <Link href={`/rooms/${chat.id}`}>JOIN</Link>
