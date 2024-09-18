@@ -23,7 +23,6 @@ export default function ChatNotFound() {
     socket.on(
       "request-accepted",
       (chat: RalerisChatGroupIndexDBModel, user) => {
-        console.log(chat, user);
         setRequestedChat(chat);
         setIsRequestAccepted(true);
       }

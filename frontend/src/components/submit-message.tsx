@@ -27,16 +27,24 @@ export default function SubmitMessage() {
     setMessage("");
   };
   return (
-    <div className=" h-[96px] py-4 flex  space-x-4 items-center justify-between">
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault();
+
+        await handleSendMessage();
+      }}
+      className=" h-[96px] py-4 flex  space-x-4 items-center justify-between"
+    >
       <Input
         type="text"
         placeholder="Type your message..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        required
       />
-      <Button onClick={handleSendMessage} className="w-fit" variant={"outline"}>
+      <Button type="submit" className="w-fit" variant={"outline"}>
         Send
       </Button>
-    </div>
+    </form>
   );
 }
