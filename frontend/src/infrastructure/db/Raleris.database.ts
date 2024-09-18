@@ -25,6 +25,7 @@ class RalerisDatabase extends Dexie {
       publicKey: payload.publicKey,
       ownerId: payload.ownerId,
       password: payload.password,
+      members: payload.members
     });
   }
 

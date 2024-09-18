@@ -30,6 +30,26 @@ export class SocketManager {
     });
   }
 
+  public onPresenceAllMembersChat() {
+    this._socket.on("member-presence", (userChatId: string, roomId: string) => {
+      this._io.to(`room-${roomId}`).emit("member-presence", userChatId);
+    });
+  }
+
+  public onLeaveRoom() {
+    this._socket.on("leave-room", (roomId: string, userId: string) => {
+      const rooms = Array.from(this._socket.rooms);
+
+      rooms.forEach((room) => {
+        if (room === this._socket.id) {
+          this._socket.leave(`room-${roomId}`);
+        }
+      });
+
+      this._io.to(`room-${roomId}`).emit("leave-room", userId);
+    });
+  }
+
   public onAdminJoinRoom() {
     this._socket.on("join-chat-admin", (roomId: string) => {
       this._logger.log(`Admin join to a room ${roomId}`);
@@ -57,7 +77,14 @@ export class SocketManager {
 
   public onAdminAcceptRequest() {
     this._socket.on("request-accepted", (data: any, newUserId: string) => {
+      // this._io.to(`room-${data.id}`).emit('new-user-joined').
       this._io.to(newUserId).emit("request-accepted", data, newUserId);
+    });
+  }
+
+  public onNewUserJoin() {
+    this._socket.on("new-user-joined", (user: any, chatId: string) => {
+      this._io.to(`room-${chatId}`).emit("new-user-joined", user);
     });
   }
 

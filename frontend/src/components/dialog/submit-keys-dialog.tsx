@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { RalerisChatGroupIndexDBModel } from "@/infrastructure/model/RalerisChatGroup.model";
 import { EncryptionService } from "@/domain/service/Encryption.service";
 import { ChatGroupService } from "@/domain/service/ChatGroup.service";
+import { useUserStore } from "@/store/user.store";
+import { socket } from "@/core/socket";
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +16,7 @@ interface Props {
 }
 export default function SubmitKeysDialog({ chat }: Props) {
   const [privatePem, setPrivatePem] = useState<CryptoKey>();
+
   const [privatePemSign, setPrivatePemSign] = useState<CryptoKey>();
   const [publicPemVerify, setPublicPemVerify] = useState<CryptoKey>();
   const [publicPem, setPublicPem] = useState<CryptoKey>();
@@ -22,6 +25,8 @@ export default function SubmitKeysDialog({ chat }: Props) {
     isError: boolean;
     message: string;
   }>({ isError: false, message: "" });
+
+  const { id, username } = useUserStore();
   return (
     <Dialog open={true}>
       <DialogContent>
@@ -60,14 +65,18 @@ export default function SubmitKeysDialog({ chat }: Props) {
                 return;
               }
 
-              await ChatGroupService.create({
+              await ChatGroupService.import({
                 id: chat.id,
                 name: chat.name,
                 ownerId: chat.ownerId,
                 password: password,
                 publicKey: publicPem!,
                 privateKey: privatePem!,
+                messages: [],
+                members: [...chat.members, { id, username }],
               });
+
+              socket.emit("new-user-joined", { id, username }, chat.id!);
 
               window.location.reload();
             } catch (error: Error | any) {

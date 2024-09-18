@@ -18,7 +18,7 @@ export default function CreateGroupChatDialog() {
   const [privatePem, setPrivatePem] = useState<CryptoKey>();
   const [publicPem, setPublicPem] = useState<CryptoKey>();
   const [password, setPassword] = useState<string>("");
-  const { id: userId } = useUserStore();
+  const { id: userId, username } = useUserStore();
   const [name, setName] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { push } = useRouter();
@@ -46,6 +46,7 @@ export default function CreateGroupChatDialog() {
               publicKey: publicPem!,
               ownerId: userId,
               password,
+              admin: { id: userId, username },
             });
 
             setIsOpen(false);

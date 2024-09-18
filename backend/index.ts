@@ -26,6 +26,9 @@ io.on("connection", (socket) => {
   socketManager.onRequestIsAdminOnline();
   socketManager.onGetConfirmationAdminOnline();
   socketManager.onAdminAcceptRequest();
+  socketManager.onNewUserJoin();
+  socketManager.onPresenceAllMembersChat();
+  socketManager.onLeaveRoom();
 });
 
 server.listen(4000, () => {

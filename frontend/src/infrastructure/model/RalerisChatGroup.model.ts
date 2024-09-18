@@ -1,4 +1,5 @@
 import { IChatEvents, IMessages } from "@/domain/interface/IMessages";
+import { RalerisUserDB } from "./RalerisUser.model";
 
 export type RalerisChatGroupIndexDBModel = {
   id?: string;
@@ -8,4 +9,5 @@ export type RalerisChatGroupIndexDBModel = {
   messages: (IMessages | IChatEvents)[];
   ownerId: string;
   password:string;
+  members: RalerisUserDB[]
 };

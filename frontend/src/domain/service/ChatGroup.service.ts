@@ -24,6 +24,27 @@ export class ChatGroupService {
       publicKey: payload.publicKey,
       ownerId: payload.ownerId,
       password: encryptedPassword,
+      members: [payload.admin],
+    };
+
+    return await RalerisRepository.add(newChatGroup);
+  }
+
+  static async import(payload: IChatGroup) {
+    const encryptedPassword = await EncryptionService.encryptText(
+      payload.password,
+      payload.publicKey
+    );
+
+    const newChatGroup: IChatGroup = {
+      id: payload.id || uuidv4(),
+      messages: [],
+      name: payload.name,
+      privateKey: payload.privateKey,
+      publicKey: payload.publicKey,
+      ownerId: payload.ownerId,
+      password: encryptedPassword,
+      members: [...payload.members],
     };
 
     return await RalerisRepository.add(newChatGroup);
@@ -51,10 +72,7 @@ export class ChatGroupService {
 
     const [encrpytedText, encryptedDate] = await Promise.all([
       await EncryptionService.encryptText(message, publicKey),
-      await EncryptionService.encryptText(
-        new Date().toISOString(),
-        publicKey
-      ),
+      await EncryptionService.encryptText(new Date().toISOString(), publicKey),
     ]);
 
     const newMessage: IMessages = {
@@ -99,5 +117,23 @@ export class ChatGroupService {
     );
 
     return newChatEvent;
+  }
+
+  static async addNewUserToChat(user: IUser, roomId: string) {
+    const room = await this.getById(roomId);
+
+    if ("error" in room) {
+      throw new Error("Room not exist");
+    }
+
+    let updateRoom: IChatGroup = {
+      ...room,
+      members: [...room.members, { id: user.id, username: user.username }],
+    };
+
+    return await RalerisRepository.ralerisChatGroupDatabase.update(
+      updateRoom.id!,
+      { ...updateRoom }
+    );
   }
 }
